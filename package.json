@@ -17,12 +17,9 @@
     "react": "^19.0.0",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.0.0",
-<<<<<<< HEAD
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
-=======
     "react-router-dom": "^7.2.0",
->>>>>>> a758121 (Create swipe card)
     "swiper": "^11.2.4"
   },
   "devDependencies": {
