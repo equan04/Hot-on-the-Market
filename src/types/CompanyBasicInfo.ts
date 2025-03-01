@@ -1,12 +1,15 @@
 type CompanyBasicInfo = {
     name: string;
+    displayName: string;
     ticker: string;
-    yearOfIncorporation: number;
+    yearIncorporated: number;
     industry: string;
+    location: string;
     revenue: number;
-    ytdPercentChange: number;
     latestStockPrice: number;
-    percentChange: number;
+    percentChange: number;  
+    imageUrl: string;
+    caption: string;
 }
 
 export default CompanyBasicInfo;

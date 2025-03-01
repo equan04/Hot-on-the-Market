@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import SwipeCard from "./swipe/SwipeCard";
+import SwipeCard from "./SwipeCard";
 import companies from "@/app/data/companies";
 
 export default function SwipeDeck() {
