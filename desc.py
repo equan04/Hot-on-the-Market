@@ -27,9 +27,6 @@ def get_desc(ticker):
 
 # def list_flags(ticker):
 #     risk_text = get_risks(ticker)
-#     client = OpenAI(api_key="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")
-    
-#     max_tokens = 12000
 #     if len(risk_text) > max_tokens:
 #         risk_text = risk_text[:max_tokens] + "..."
     
