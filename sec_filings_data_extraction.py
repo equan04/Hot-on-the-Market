@@ -46,6 +46,8 @@ def create_dataframe(path):
         "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
         "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"
     ]
+    
+    # pd.read_csv("combined_data.csv").isna().sum()
 
     tag_extracted_data = data_spec[data_spec['tag'].isin(xbrl_tags)]
 
@@ -58,6 +60,10 @@ def create_dataframe(path):
 
     final = pd.merge(sub_extracted_spec, tag_extracted_data, on='adsh')
 
+    final = final.pivot(index=["adsh", "name", "fy", "fp"], columns="tag", values="value")
+    final.reset_index(level=["name", "fy", "fp"], inplace=True)
+    final["fp"] = final["fp"].apply(lambda x: x if x != "FY" else "Q4/FY")
+
     return final
 
 combined_dataframe = pd.DataFrame()
@@ -69,6 +75,8 @@ for dir in os.listdir("data"):
 
     combined_dataframe = pd.concat([combined_dataframe, df])
 
-combined_dataframe.reset_index(inplace=True)
-combined_dataframe.drop(["index"], axis=1, inplace=True)
+# combined_dataframe.reset_index(inplace=True)
+# combined_dataframe.drop(["index"], axis=1, inplace=True)
+
+combined_dataframe.sort_values(by=['name', 'fy', 'fp'], inplace=True)
 combined_dataframe.to_csv("combined_data.csv")
