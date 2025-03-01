@@ -313,7 +313,7 @@ class StockNews:
         Returns:
             str: Path to the saved CSV file
         """
-        tickers = ['AAPL', 'COF', 'AMZN', 'ABNB', 'META', 'WBA', 'NFLX', 'TSLA', 'COST', 'MCD', 'DUOL']
+        tickers = ['AAPL', 'COF', 'AMZN', 'ABNB', 'RDDT', 'WBA', 'NFLX', 'TSLA', 'COST', 'MCD', 'DUOL']
         data = []
         
         for ticker in tickers:
@@ -398,5 +398,6 @@ class StockNews:
 #         print("Failed to create CSV file")
 
 
-# if __name__ == "__main__":
-#     test_stock_news()
+if __name__ == "__main__":
+    obj = StockNews();
+    obj.to_csv()
