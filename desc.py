@@ -1,4 +1,5 @@
 import json
+import pandas
 from sec_api import QueryApi, ExtractorApi
 extractorApi = ExtractorApi("3742c51d206fac1fc757860676305a16011438f68bd125329cc98f0ad8fe6e0d")
 queryApi = QueryApi(api_key = "3742c51d206fac1fc757860676305a16011438f68bd125329cc98f0ad8fe6e0d")
@@ -15,6 +16,12 @@ class Desc:
         response = queryApi.get_filings(query)
         return response
     
-    def get_1A(self, ticker):
+    def get_risks(self, ticker):
         url = self.get_10k(ticker)["linkToFilingDetails"]
         section_text = extractorApi.get_section(url, "1A", "text")
+        return section_text
+
+    def get_desc(self, ticker):
+        url = self.get_10k(ticker)["linkToFilingDetails"]
+        section_text = extractorApi.get_section(url, "1", "text")
+        return section_text
