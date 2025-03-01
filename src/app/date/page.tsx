@@ -2,7 +2,7 @@
 import CompanyProfile from "@/components/CompanyProfile";
 import CompanyBasicInfo from "@/types/CompanyBasicInfo";
 import CompanyGraphInfo from "@/types/CompanyGraphInfo";
-import SwipeDeck from "src/components/Swipedeck";
+import SwipeDeck from "@/components/Swipedeck";
 
 const dummyCompanyBasicData: CompanyBasicInfo = {
     name: "Capital One",
