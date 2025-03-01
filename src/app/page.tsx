@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image"; 
 import LineChart from "./lineCharts";
 
-
+// // Define dummy data
 // const dummyCompanyData = {
 //   name: "Company XYZ",
 //   assets: [1000, 1200, 1500, 1800, 2100],
@@ -22,8 +22,9 @@ import LineChart from "./lineCharts";
 // };
 
 // export default function Home() {
-//   return <LineChart companyData={dummyCompanyData}/>
+//   return <LineChart companyData={dummyCompanyData} />;
 // }
+
 
 
 export default function Home() {
