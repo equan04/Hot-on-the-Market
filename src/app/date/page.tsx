@@ -1,19 +1,5 @@
-"use client"
-import CompanyProfile from "@/components/CompanyProfile";
-import CompanyBasicInfo from "@/types/CompanyBasicInfo";
 import CompanyGraphInfo from "@/types/CompanyGraphInfo";
-import SwipeDeck from "src/components/Swipedeck";
-
-const dummyCompanyBasicData: CompanyBasicInfo = {
-    name: "Capital One",
-    ticker: "COF",
-    yearOfIncorporation: 1994,
-    industry: "",
-    revenue: 0,
-    ytdPercentChange: 0,
-    latestStockPrice: 0,
-    percentChange: 0
-}
+import SwipeDeck from "@/components/Swipedeck";
 
 const dummyCompanyGraphData: CompanyGraphInfo = {
   name: "Company XYZ",
@@ -32,13 +18,6 @@ const dummyCompanyGraphData: CompanyGraphInfo = {
   isQuarterly: true,
 };
 
-// export default function Home() {
-//     return (
-//         <CompanyProfile basicInfo={dummyCompanyBasicData} graphInfo={dummyCompanyGraphData}/>
-//     );
-// }
-
-
 export default function Home() {
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
@@ -46,4 +25,3 @@ export default function Home() {
     </div>
   );
 }
-
