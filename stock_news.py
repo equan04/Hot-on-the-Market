@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from dateutil import parser
 from transformers import BertTokenizer, BertForSequenceClassification, pipeline
 import torch
+import csv
 
 class StockNews:
     def __init__(self):
@@ -51,7 +52,7 @@ class StockNews:
             print(f"No news table found for {ticker}")
             return []
             
-        rows = html_table.findAll('tr')
+        rows = html_table.find_all('tr')
         
         articles = []
         current_date = None
@@ -95,23 +96,18 @@ class StockNews:
                 
                 if current_date:
                     # Convert the date string to a datetime object
-                    try:
-                        article_date = parser.parse(current_date)
-                        
-                        # Only include articles within the specified time range
-                        if article_date >= threshold_date:
-                            articles.append({
-                                "title": headline,
-                                "url": url,
-                                "date": article_date.strftime('%Y-%m-%d'),
-                                "source": source
-                            })
-                    except Exception as e:
-                        print(f"Error parsing date {current_date}: {e}")
+                    article_date = parser.parse(current_date)
+                    
+                    # Only include articles within the specified time range
+                    if article_date >= threshold_date:
+                        articles.append({
+                            "title": headline,
+                            "url": url,
+                            "date": article_date.strftime('%Y-%m-%d'),
+                            "source": source
+                        })
             except Exception as e:
-                print(f"Error processing row: {e}")
-                continue
-                
+                continue     
         return articles
     
     def analyze_sentiment(self, articles):
@@ -143,8 +139,6 @@ class StockNews:
                     sentiment_value = confidence
                 elif label == "Negative":
                     sentiment_value = -confidence
-                else:  # Neutral
-                    sentiment_value = 0
                 
                 # Add to results
                 article_with_sentiment = article.copy()
@@ -209,30 +203,6 @@ class StockNews:
         total_count = len(df)
         
         return round((negative_count / total_count) * 100, 1)
-    
-    def get_neutral_percentage(self, ticker, days=30):
-        """
-        Get the percentage of neutral news articles for a ticker
-        
-        Args:
-            ticker (str): Stock ticker symbol (e.g., 'AAPL')
-            days (int): Number of days to look back for articles
-            
-        Returns:
-            float: Percentage of neutral articles
-        """
-        articles = self.get_news_articles(ticker, days)
-        if not articles:
-            return 0.0
-            
-        df = self.analyze_sentiment(articles)
-        if df.empty:
-            return 0.0
-            
-        neutral_count = len(df[df['sentiment_label'] == 'Neutral'])
-        total_count = len(df)
-        
-        return round((neutral_count / total_count) * 100, 1)
 
     def get_most_positive_article(self, df):
         """Return the article with the highest positive sentiment score"""
@@ -269,7 +239,7 @@ class StockNews:
             return {
                 'most_positive_article': None,
                 'most_negative_article': None,
-                'sentiment_distribution': {'positive': 0, 'neutral': 0, 'negative': 0},
+                'sentiment_distribution': {'positive': 0, 'negative': 0},
                 'all_articles': []
             }
         
@@ -285,42 +255,106 @@ class StockNews:
         # Get sentiment distribution
         positive_percentage = self.get_positive_percentage(ticker, days)
         negative_percentage = self.get_negative_percentage(ticker, days)
-        neutral_percentage = self.get_neutral_percentage(ticker, days)
         
         # Return results
         return {
+            'name' : ticker,
             'most_positive_article': most_positive,
             'most_negative_article': most_negative,
             'positive_percentage': positive_percentage,
             'negative_percentage': negative_percentage,
-            'neutral_percentage': neutral_percentage,
-            'all_articles': df.to_dict('records')
+            'article count' : len(articles)
+            # 'all_articles': df.to_dict('records')
         }
-    
-# def test_stock_news():
-#     # Create an instance of StockNews
-#     news = StockNews()
-    
-#     # Choose a ticker to test (e.g., AAPL for Apple)
-#     ticker = 'AAPL'
-    
-#     # Get news for the last 7 days
-#     print(f"\\nFetching news for {ticker} from the last 7 days...")
-#     articles = news.get_news_articles(ticker, 7)
-    
-#     # Print results
-#     if articles:
-#         print(f"\\nFound {len(articles)} articles for {ticker}:")
-#         for i, article in enumerate(articles[:5]):  # Print first 5 articles
-#             print(f"\\n{i+1}. {article['title']}")
-#             print(f"   Source: {article['source']}")
-#             print(f"   Date: {article['date']}")
-#             print(f"   URL: {article['url']}")
-        
-#         if len(articles) > 5:
-#             print(f"\\n...and {len(articles) - 5} more articles")
-#     else:
-#         print(f"No articles found for {ticker}")
 
-# if __name__ == "__main__":
-#     test_stock_news()
+    def to_csv(self, tickers=None):
+        """
+        Analyze multiple stocks and save results to CSV
+        
+        Args:
+            tickers (list): List of ticker symbols to analyze. If None, uses default list.
+            
+        Returns:
+            str: Path to the saved CSV file
+        """
+        tickers = ['AAPL', 'COF', 'AMZN', 'ABNB', 'META', 'WBA', 'NFLX', 'TSLA', 'COST', 'MCD', 'DUOL']
+        data = []
+        
+        for ticker in tickers:
+            try:
+                result = self.analyze_stock_news(ticker)
+                data.append(result)
+            except Exception as e:
+                print(f"Error analyzing {ticker}: {e}")
+        
+        filename = 'news.csv'
+        
+        try:
+            # Convert to DataFrame for easier CSV writing
+            df = pd.DataFrame(data)
+            
+            # Handle nested dictionaries (most_positive_article and most_negative_article)
+            for idx, row in df.iterrows():
+                if row['most_positive_article']:
+                    df.at[idx, 'most_positive_title'] = row['most_positive_article'].get('title', '')
+                    df.at[idx, 'most_positive_score'] = row['most_positive_article'].get('sentiment_score', 0)
+                    df.at[idx, 'most_positive_url'] = row['most_positive_article'].get('url', '')
+                    df.at[idx, 'most_positive_date'] = row['most_positive_article'].get('date', '')
+                    df.at[idx, 'most_positive_source'] = row['most_positive_article'].get('source', '')
+                
+                if row['most_negative_article']:
+                    df.at[idx, 'most_negative_title'] = row['most_negative_article'].get('title', '')
+                    df.at[idx, 'most_negative_score'] = row['most_negative_article'].get('sentiment_score', 0)
+                    df.at[idx, 'most_negative_url'] = row['most_negative_article'].get('url', '')
+                    df.at[idx, 'most_negative_date'] = row['most_negative_article'].get('date', '')
+                    df.at[idx, 'most_negative_source'] = row['most_negative_article'].get('source', '')
+            
+            # Drop the complex columns
+            df = df.drop(['most_positive_article', 'most_negative_article'], axis=1)
+            
+            # Save to CSV
+            df.to_csv(filename, index=False)
+            print(f"Results saved to {filename}")
+            return filename
+        except Exception as e:
+            print(f"Error saving to CSV: {e}")
+            return None
+
+
+def test_stock_news():
+    # Create an instance of StockNews
+    news = StockNews()
+    
+    # Test with a single stock first
+    test_ticker = 'AAPL'
+    print(f"\nTesting with a single stock: {test_ticker}")
+    
+    # Get articles
+    articles = news.get_news_articles(test_ticker, days=7)
+    if articles:
+        print(f"Found {len(articles)} articles for {test_ticker}")
+        # Print first article details
+        if len(articles) > 0:
+            print(f"First article: {articles[0]['title']}")
+    else:
+        print(f"No articles found for {test_ticker}")
+    
+    # Test full analysis
+    result = news.analyze_stock_news(test_ticker)
+    print(f"\nAnalysis results for {test_ticker}:")
+    print(f"Positive: {result['positive_percentage']}%")
+    print(f"Negative: {result['negative_percentage']}%")
+    
+    # Test CSV export with fewer tickers for quicker testing
+    test_tickers = ['AAPL', 'MSFT', 'AMZN']
+    print(f"\nTesting CSV export with tickers: {', '.join(test_tickers)}")
+    csv_file = news.to_csv(test_tickers)
+    
+    if csv_file:
+        print(f"CSV file created successfully: {csv_file}")
+    else:
+        print("Failed to create CSV file")
+
+
+if __name__ == "__main__":
+    test_stock_news()
