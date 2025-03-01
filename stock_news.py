@@ -139,6 +139,8 @@ class StockNews:
                     sentiment_value = confidence
                 elif label == "Negative":
                     sentiment_value = -confidence
+                else:
+                    sentiment_value = 0
                 
                 # Add to results
                 article_with_sentiment = article.copy()
@@ -203,6 +205,30 @@ class StockNews:
         total_count = len(df)
         
         return round((negative_count / total_count) * 100, 1)
+    
+    def get_neutral_percentage(self, ticker, days=30):
+        """
+        Get the percentage of neutral news articles for a ticker
+        
+        Args:
+            ticker (str): Stock ticker symbol (e.g., 'AAPL')
+            days (int): Number of days to look back for articles
+            
+        Returns:
+            float: Percentage of neutral articles
+        """
+        articles = self.get_news_articles(ticker, days)
+        if not articles:
+            return 0.0
+            
+        df = self.analyze_sentiment(articles)
+        if df.empty:
+            return 0.0
+            
+        neutral_count = len(df[df['sentiment_label'] == 'Neutral'])
+        total_count = len(df)
+        
+        return round((neutral_count / total_count) * 100, 1)
 
     def get_most_positive_article(self, df):
         """Return the article with the highest positive sentiment score"""
@@ -215,6 +241,12 @@ class StockNews:
         if df.empty:
             return None
         return df.loc[df['sentiment_score'].idxmin()].to_dict()
+    
+    def get_neutral_article(self, df):
+        if df.empty:
+            return None
+        df['abs_sentiment'] = df['sentiment_score'].abs()
+        return df.loc[df['abs_sentiment'].idxmin()].to_dict()
     
     def analyze_stock_news(self, ticker, days=30, plot=True):
         """
@@ -251,18 +283,22 @@ class StockNews:
         # Get most positive and negative articles
         most_positive = self.get_most_positive_article(df)
         most_negative = self.get_most_negative_article(df)
+        neutral = self.get_neutral_article(df)
         
         # Get sentiment distribution
         positive_percentage = self.get_positive_percentage(ticker, days)
         negative_percentage = self.get_negative_percentage(ticker, days)
+        neutral_percentage = self.get_neutral_percentage(ticker, days)
         
         # Return results
         return {
             'name' : ticker,
             'most_positive_article': most_positive,
             'most_negative_article': most_negative,
+            'neutral_article' : neutral,
             'positive_percentage': positive_percentage,
             'negative_percentage': negative_percentage,
+            'neutral_percentage' : neutral_percentage,
             'article count' : len(articles)
             # 'all_articles': df.to_dict('records')
         }
@@ -308,9 +344,16 @@ class StockNews:
                     df.at[idx, 'most_negative_url'] = row['most_negative_article'].get('url', '')
                     df.at[idx, 'most_negative_date'] = row['most_negative_article'].get('date', '')
                     df.at[idx, 'most_negative_source'] = row['most_negative_article'].get('source', '')
+                
+                if row['neutral_article']:
+                    df.at[idx, 'neutral_title'] = row['neutral_article'].get('title', '')
+                    df.at[idx, 'neutral_score'] = row['neutral_article'].get('sentiment_score', 0)
+                    df.at[idx, 'neutral_url'] = row['neutral_article'].get('url', '')
+                    df.at[idx, 'neutral_date'] = row['neutral_article'].get('date', '')
+                    df.at[idx, 'neutral_source'] = row['neutral_article'].get('source', '')
             
             # Drop the complex columns
-            df = df.drop(['most_positive_article', 'most_negative_article'], axis=1)
+            df = df.drop(['most_positive_article', 'most_negative_article', 'neutral_article'], axis=1)
             
             # Save to CSV
             df.to_csv(filename, index=False)
