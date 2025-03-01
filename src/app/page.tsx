@@ -1,31 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import Image from "next/image"; 
-import LineChart from "./lineCharts";
-
-// // Define dummy data
-// const dummyCompanyData = {
-//   name: "Company XYZ",
-//   assets: [1000, 1200, 1500, 1800, 2100],
-//   liabilities: [500, 600, 700, 800, 900],
-//   stockholdersEquity: [500, 600, 800, 1000, 1200],
-//   revenue: [200, 250, 300, 350, 400],
-//   netIncome: [50, 60, 70, 80, 90],
-//   opIncome: [150, 170, 190, 210, 230],
-//   compIncome: [150, 160, 170, 180, 190],
-//   epsBasic: [1.2, 1.3, 1.5, 1.6, 1.7],
-//   epsDiluted: [1.1, 1.2, 1.3, 1.4, 1.5],
-//   commonStock: [500, 520, 550, 580, 600],
-//   year: [2021, 2022, 2023, 2024, 2025],
-//   quarter: [1, 2, 3, 4, 1],
-//   isQuarterly: true,
-// };
-
-// export default function Home() {
-//   return <LineChart companyData={dummyCompanyData} />;
-// }
-
-
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -37,7 +12,8 @@ export default function Home() {
           <div>When You Can Make Money? 🤑</div>
         </div>
         <p className="mt-4 text-lg sm:text-xl text-gray-200">
-          Swipe. Match. Invest. Discover the hottest companies looking for backers like you.
+          Swipe. Match. Invest. Discover the hottest companies looking for
+          backers like you.
         </p>
       </header>
 
@@ -75,7 +51,11 @@ export default function Home() {
           />
         </motion.div>
         <div className="text-center text-lg text-gray-200 mt-4">
-          <p>Swipe through stock profiles as if you're swiping on a dating app. Get to know each company's bio, recent news, and performance.</p>
+          <p>
+            Swipe through stock profiles as if you&apos;re swiping on a dating
+            app. Get to know each company&apos;s bio, recent news, and
+            performance.
+          </p>
         </div>
 
         {/* Image 2 */}
@@ -94,7 +74,10 @@ export default function Home() {
           />
         </motion.div>
         <div className="text-center text-lg text-gray-200 mt-4">
-          <p>On hover, see key financial stats like gross profit and shares outstanding. Know exactly what you're investing in!</p>
+          <p>
+            On hover, see key financial stats like gross profit and shares
+            outstanding. Know exactly what you&apos;re investing in!
+          </p>
         </div>
 
         {/* Image 3 */}
@@ -113,7 +96,10 @@ export default function Home() {
           />
         </motion.div>
         <div className="text-center text-lg text-gray-200 mt-4">
-          <p>Visualize stock data in various timeframes to help you track the performance over time and make smarter investment decisions.</p>
+          <p>
+            Visualize stock data in various timeframes to help you track the
+            performance over time and make smarter investment decisions.
+          </p>
         </div>
 
         {/* Image 4 */}
@@ -132,7 +118,10 @@ export default function Home() {
           />
         </motion.div>
         <div className="text-center text-lg text-gray-200 mt-4">
-          <p>Stay up-to-date with the latest news affecting the stock’s performance. Don’t miss out on the latest updates!</p>
+          <p>
+            Stay up-to-date with the latest news affecting the stock’s
+            performance. Don’t miss out on the latest updates!
+          </p>
         </div>
       </div>
 
@@ -151,10 +140,9 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="text-sm text-gray-200 mt-auto">
-        Made with ❤️ by Anika Radhakrishnan, Kaavya Mahajan, Sophie Lin, and Emmett Quan
+        Made with ❤️ by Anika Radhakrishnan, Kaavya Mahajan, Sophie Lin, and
+        Emmett Quan
       </footer>
     </div>
   );
 }
-
-
