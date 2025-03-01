@@ -1,101 +1,135 @@
-import Image from "next/image";
+"use client";
+import { motion } from "framer-motion";
+import Image from "next/image"; 
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-pink-500 to-red-500 text-white p-6">
+      {/* Hero Section */}
+      <header className="text-center max-w-3xl">
+        <div className="text-4xl sm:text-6xl font-bold leading-tight flex flex-col">
+          <div>Who Needs Love 💖 </div>
+          <div>When You Can Make Money? 🤑</div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        <p className="mt-4 text-lg sm:text-xl text-gray-200">
+          Swipe. Match. Invest. Discover the hottest companies looking for backers like you.
+        </p>
+      </header>
+
+      {/* Call-to-Action Buttons */}
+      <div className="mt-8 flex flex-col sm:flex-row gap-4">
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/signup"
+          className="bg-white text-pink-500 hover:bg-gray-200 font-semibold py-3 px-6 rounded-full text-lg shadow-md transition-all"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
+          Get Started
         </a>
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/learn-more"
+          className="bg-transparent border border-white text-white hover:bg-white hover:text-pink-500 font-semibold py-3 px-6 rounded-full text-lg shadow-md transition-all"
+        >
+          Learn More
+        </a>
+      </div>
+
+      {/* Image Section with Scroll-triggered Animations */}
+      <div className="mt-10 space-y-10">
+        {/* Image 1 */}
+        <motion.div
+          initial={{ opacity: 0, x: "100%" }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeOut" }}
         >
           <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+            src="/dating-app-illustration.svg"
+            alt="Dating app illustration"
+            width={400}
+            height={300}
+            priority
           />
-          Examples
-        </a>
+        </motion.div>
+        <div className="text-center text-lg text-gray-200 mt-4">
+          <p>Swipe through stock profiles as if you're swiping on a dating app. Get to know each company's bio, recent news, and performance.</p>
+        </div>
+
+        {/* Image 2 */}
+        <motion.div
+          initial={{ opacity: 0, x: "-100%" }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+        >
+          <Image
+            src="/dating-app-illustration2.svg"
+            alt="Stock profile with details"
+            width={400}
+            height={300}
+            priority
+          />
+        </motion.div>
+        <div className="text-center text-lg text-gray-200 mt-4">
+          <p>On hover, see key financial stats like gross profit and shares outstanding. Know exactly what you're investing in!</p>
+        </div>
+
+        {/* Image 3 */}
+        <motion.div
+          initial={{ opacity: 0, x: "100%" }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+        >
+          <Image
+            src="/dating-app-illustration3.svg"
+            alt="Visualization of stock data"
+            width={400}
+            height={300}
+            priority
+          />
+        </motion.div>
+        <div className="text-center text-lg text-gray-200 mt-4">
+          <p>Visualize stock data in various timeframes to help you track the performance over time and make smarter investment decisions.</p>
+        </div>
+
+        {/* Image 4 */}
+        <motion.div
+          initial={{ opacity: 0, x: "-100%" }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
+        >
+          <Image
+            src="/dating-app-illustration4.svg"
+            alt="News about stock performance"
+            width={400}
+            height={300}
+            priority
+          />
+        </motion.div>
+        <div className="text-center text-lg text-gray-200 mt-4">
+          <p>Stay up-to-date with the latest news affecting the stock’s performance. Don’t miss out on the latest updates!</p>
+        </div>
+      </div>
+
+      {/* Call to Action: Ready to Invest? */}
+      <div className="mt-10 text-center mb-16">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-white">
+          Ready to invest? Start here. 💼📈
+        </h2>
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/signup"
+          className="mt-4 inline-block bg-white text-pink-500 hover:bg-gray-200 font-semibold py-3 px-6 rounded-full text-lg shadow-md transition-all"
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
+          Start Investing Now
         </a>
+      </div>
+
+      {/* Footer */}
+      <footer className="text-sm text-gray-200 mt-auto">
+        Made with ❤️ by Anika Radhakrishnan, Kaavya Mahajan, Sophie Lin, and Emmett Quan
       </footer>
     </div>
   );
 }
+
+
