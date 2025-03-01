@@ -3,26 +3,10 @@
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import 'chart.js/auto';
-
-interface CompanyProp {
-    name: string,
-    assets: number[],
-    liabilities: number[],
-    stockholdersEquity: number[], 
-    revenue: number[],
-    netIncome: number[],
-    opIncome: number[],
-    compIncome: number[],
-    epsBasic: number[],
-    epsDiluted: number[],
-    commonStock: number[],
-    year: number[],
-    quarter: number[],
-    isQuarterly: boolean
-}
+import CompanyGraphInfo from 'src/types/CompanyGraphInfo';
 
 interface LineChartProps {
-    companyData: CompanyProp;
+    companyData: CompanyGraphInfo;
 }
 
 
