@@ -363,41 +363,40 @@ class StockNews:
             print(f"Error saving to CSV: {e}")
             return None
 
+# def test_stock_news():
+#     # Create an instance of StockNews
+#     news = StockNews()
+    
+#     # Test with a single stock first
+#     test_ticker = 'AAPL'
+#     print(f"\nTesting with a single stock: {test_ticker}")
+    
+#     # Get articles
+#     articles = news.get_news_articles(test_ticker, days=7)
+#     if articles:
+#         print(f"Found {len(articles)} articles for {test_ticker}")
+#         # Print first article details
+#         if len(articles) > 0:
+#             print(f"First article: {articles[0]['title']}")
+#     else:
+#         print(f"No articles found for {test_ticker}")
+    
+#     # Test full analysis
+#     result = news.analyze_stock_news(test_ticker)
+#     print(f"\nAnalysis results for {test_ticker}:")
+#     print(f"Positive: {result['positive_percentage']}%")
+#     print(f"Negative: {result['negative_percentage']}%")
+    
+#     # Test CSV export with fewer tickers for quicker testing
+#     test_tickers = ['AAPL', 'MSFT', 'AMZN']
+#     print(f"\nTesting CSV export with tickers: {', '.join(test_tickers)}")
+#     csv_file = news.to_csv(test_tickers)
+    
+#     if csv_file:
+#         print(f"CSV file created successfully: {csv_file}")
+#     else:
+#         print("Failed to create CSV file")
 
-def test_stock_news():
-    # Create an instance of StockNews
-    news = StockNews()
-    
-    # Test with a single stock first
-    test_ticker = 'AAPL'
-    print(f"\nTesting with a single stock: {test_ticker}")
-    
-    # Get articles
-    articles = news.get_news_articles(test_ticker, days=7)
-    if articles:
-        print(f"Found {len(articles)} articles for {test_ticker}")
-        # Print first article details
-        if len(articles) > 0:
-            print(f"First article: {articles[0]['title']}")
-    else:
-        print(f"No articles found for {test_ticker}")
-    
-    # Test full analysis
-    result = news.analyze_stock_news(test_ticker)
-    print(f"\nAnalysis results for {test_ticker}:")
-    print(f"Positive: {result['positive_percentage']}%")
-    print(f"Negative: {result['negative_percentage']}%")
-    
-    # Test CSV export with fewer tickers for quicker testing
-    test_tickers = ['AAPL', 'MSFT', 'AMZN']
-    print(f"\nTesting CSV export with tickers: {', '.join(test_tickers)}")
-    csv_file = news.to_csv(test_tickers)
-    
-    if csv_file:
-        print(f"CSV file created successfully: {csv_file}")
-    else:
-        print("Failed to create CSV file")
 
-
-if __name__ == "__main__":
-    test_stock_news()
+# if __name__ == "__main__":
+#     test_stock_news()
