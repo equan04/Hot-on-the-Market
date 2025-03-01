@@ -9,13 +9,13 @@ from transformers import BertTokenizer, BertForSequenceClassification, pipeline
 import torch
 
 class StockNews:
-    # def __init__(self):
-    #     # Initialize FinBERT model for financial sentiment analysis
-    #     print("Loading FinBERT model...")
-    #     self.finbert = BertForSequenceClassification.from_pretrained('yiyanghkust/finbert-tone', num_labels=3)
-    #     self.tokenizer = BertTokenizer.from_pretrained('yiyanghkust/finbert-tone')
-    #     self.nlp = pipeline("text-classification", model=self.finbert, tokenizer=self.tokenizer)
-    #     print("FinBERT model loaded successfully!")
+    def __init__(self):
+        # Initialize FinBERT model for financial sentiment analysis
+        print("Loading FinBERT model...")
+        self.finbert = BertForSequenceClassification.from_pretrained('yiyanghkust/finbert-tone', num_labels=3)
+        self.tokenizer = BertTokenizer.from_pretrained('yiyanghkust/finbert-tone')
+        self.nlp = pipeline("text-classification", model=self.finbert, tokenizer=self.tokenizer)
+        print("FinBERT model loaded successfully")
         
     def get_news_articles(self, ticker, days):
         """
@@ -34,7 +34,7 @@ class StockNews:
         
         # FinViz scraping
         req = Request(
-            url=f'https://finviz.com/quote.ashx?t={ticker}',
+            url=f'https://finviz.com/quote.ashx?t='+ticker,
             headers={'User-Agent': 'Mozilla/5.0'}
         )
         
@@ -296,3 +296,31 @@ class StockNews:
             'neutral_percentage': neutral_percentage,
             'all_articles': df.to_dict('records')
         }
+    
+# def test_stock_news():
+#     # Create an instance of StockNews
+#     news = StockNews()
+    
+#     # Choose a ticker to test (e.g., AAPL for Apple)
+#     ticker = 'AAPL'
+    
+#     # Get news for the last 7 days
+#     print(f"\\nFetching news for {ticker} from the last 7 days...")
+#     articles = news.get_news_articles(ticker, 7)
+    
+#     # Print results
+#     if articles:
+#         print(f"\\nFound {len(articles)} articles for {ticker}:")
+#         for i, article in enumerate(articles[:5]):  # Print first 5 articles
+#             print(f"\\n{i+1}. {article['title']}")
+#             print(f"   Source: {article['source']}")
+#             print(f"   Date: {article['date']}")
+#             print(f"   URL: {article['url']}")
+        
+#         if len(articles) > 5:
+#             print(f"\\n...and {len(articles) - 5} more articles")
+#     else:
+#         print(f"No articles found for {ticker}")
+
+# if __name__ == "__main__":
+#     test_stock_news()
