@@ -147,7 +147,7 @@ export default function CompanyModal({ company, onClose }: CompanyModalProps) {
             </div>
 
             {/* Right Column - Caption and Chart */}
-            <div className="w-1/2 p-20 space-y-8">
+            <div className="w-1/2 px-5 pr-20 py-20 space-y-8">
               <p className="text-2xl text-gray-600 italic">
                 &quot;
                 <TypewriterText text={company.caption} />
