@@ -117,7 +117,7 @@ export default function CompanyModal({ company, onClose }: CompanyModalProps) {
             <div className="w-1/2 p-20 space-y-8">
               <p className="text-2xl text-gray-600 italic">
                 &quot;
-                <TypewriterText text={company.caption} speed={75} />
+                <TypewriterText text={company.caption} />
                 &quot;
               </p>
               <div className="bg-white rounded-xl shadow-lg p-8">

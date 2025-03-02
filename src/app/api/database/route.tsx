@@ -36,13 +36,7 @@ ORDER BY fy DESC, fp DESC;
 // Return db connection
 export async function openDB(): Promise<Database> {
   try {
-    const dbPath = path.join(
-      process.cwd(),
-      "src",
-      "app",
-      "data",
-      "company_data.db"
-    );
+    const dbPath = path.join(process.cwd(), "src", "data", "company_data.db");
     console.log("[Database] Attempting to connect to:", dbPath);
 
     const db = await open({

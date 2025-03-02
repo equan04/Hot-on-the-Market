@@ -2,11 +2,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-import 'react-chatbot-kit/build/main.css'
+import "react-chatbot-kit/build/main.css";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-pink-500 to-red-500 text-white p-6">
+    <div className="flex flex-col items-center justify-center min-h-screen overflow-x-hidden bg-gradient-to-br from-pink-500 to-red-500 text-white p-6">
       {/* Hero Section */}
       <header className="text-center max-w-3xl">
         <div className="text-4xl sm:text-6xl font-bold leading-tight flex flex-col">
@@ -22,7 +22,7 @@ export default function Home() {
       {/* Call-to-Action Buttons */}
       <div className="mt-8 flex flex-col sm:flex-row gap-4">
         <a
-          href="/signup"
+          href="/date"
           className="bg-white text-pink-500 hover:bg-gray-200 font-semibold py-3 px-6 rounded-full text-lg shadow-md transition-all"
         >
           Get Started
@@ -133,7 +133,7 @@ export default function Home() {
           Ready to invest? Start here. 💼📈
         </h2>
         <a
-          href="/signup"
+          href="/date"
           className="mt-4 inline-block bg-white text-pink-500 hover:bg-gray-200 font-semibold py-3 px-6 rounded-full text-lg shadow-md transition-all"
         >
           Start Investing Now
