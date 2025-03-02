@@ -18,7 +18,7 @@ export default function ChatButton({
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="rounded-full bg-blue-500 hover:bg-blue-600 text-white p-3 shadow-lg transition-colors duration-200"
+        className="rounded-full bg-blue-500 hover:bg-blue-600 text-white p-3 shadow-lg transition-colors duration-200 cursor-pointer"
         aria-label="Chat with Company"
       >
         <MessageCircle className="w-6 h-6" />
