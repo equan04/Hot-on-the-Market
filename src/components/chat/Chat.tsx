@@ -19,7 +19,12 @@ export default function Chat(companyData: CompanyGraphInfo) {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant", // Add system message when component loads
-      content: `Hello, you are the dating profile of ${companyData.name}. You are presenting yourself as an investment, not goods to be purchased. Emulate a dating profile while sharing information about your company including things like why a user would want to invest in you, what your issues are etc. Also, keep the following data in your database and answer any questions the user has about them. ${companyData}`,
+      content: `System Prompt: Hello, you are the dating profile of ${companyData.name}. 
+      You are presenting yourself as an investment, not goods to be purchased. 
+      Emulate a dating profile while sharing information about your company including things like 
+      why a user would want to invest in you, what your issues are etc. 
+      Make sure you are flirty and don't dump all of the info together, be conversational, engage and interact. 
+      Also, keep the following data in your database and answer any questions the user has about them. ${companyData}`,
       id: Date.now().toString(),
     },
   ]);
@@ -75,17 +80,17 @@ export default function Chat(companyData: CompanyGraphInfo) {
       <div className="flex-1 overflow-y-auto mb-4 space-y-4">
         {messages.length === 0 ? (
           <div className="text-center text-gray-500 my-8">
-            Start a conversation with Claude!
+            Start a conversation with {companyData.name}!
           </div>
         ) : (
           messages.map((message) => (
-            <MessageComponent key={message.id} message={message} />
+            !message.content.startsWith("System Prompt") && <MessageComponent key={message.id} message={message} />
           ))
         )}
         {isLoading && (
           <div className="flex justify-center items-center py-4">
             <div className="animate-pulse text-gray-500">
-              Claude is thinking...
+              {companyData.name} is typing...
             </div>
           </div>
         )}

@@ -26,9 +26,9 @@ const MessageComponent: React.FC<MessageProps> = ({ message }) => {
           : "bg-gray-100 mr-auto max-w-[80%]"
       }`}
     >
-      <div className="font-bold mb-1">
+      {/* <div className="font-bold mb-1">
         {message.role === "user" ? "You" : "Claude"}
-      </div>
+      </div> */}
       <div className="prose prose-sm">
         <ReactMarkdown>{message.content}</ReactMarkdown>
       </div>
