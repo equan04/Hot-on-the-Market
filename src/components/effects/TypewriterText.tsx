@@ -17,14 +17,9 @@ export default function TypewriterText({
   const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
-    // Reset when text changes
     setDisplayText("");
     setIsTyping(true);
-
-    // Ensure text is a string and handle any undefined cases
     const safeText = typeof text === "string" ? text : "";
-
-    // Split text into array of characters, properly handling emojis and special characters
     const characters = [...safeText];
 
     let currentIndex = 0;
@@ -32,7 +27,6 @@ export default function TypewriterText({
     const typeText = () => {
       if (currentIndex < characters.length) {
         const nextChar = characters[currentIndex];
-        console.log("Adding character:", nextChar);
         setDisplayText((prev) => prev + nextChar);
         currentIndex++;
         setTimeout(typeText, speed);

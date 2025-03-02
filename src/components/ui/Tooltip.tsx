@@ -32,7 +32,7 @@ export default function Tooltip({
         position: "absolute",
         width: "8px",
         height: "8px",
-        backgroundColor: "rgb(31, 41, 55)", // matches bg-gray-800
+        backgroundColor: "rgb(31, 41, 55)",
         transform: "rotate(45deg)",
       };
 
@@ -101,10 +101,7 @@ export default function Tooltip({
       setArrowStyle(arrow);
     };
 
-    // Initial position update
     updatePosition();
-
-    // Update position when tooltip becomes visible
     const observer = new MutationObserver(updatePosition);
 
     if (tooltipRef.current) {

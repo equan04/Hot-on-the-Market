@@ -18,7 +18,6 @@ export function useCompany(companyName: string): UseCompanyResult {
         setIsLoading(true);
         setError(null);
         
-        console.log(`[API Request] Fetching data for company: ${companyName}`);
         const response = await fetch(`/api/database?company=${encodeURIComponent(companyName)}`);
         
         if (!response.ok) {
@@ -33,7 +32,6 @@ export function useCompany(companyName: string): UseCompanyResult {
         }
         
         const result = await response.json();
-        console.log(`[API Success] Received data for company: ${companyName}`);
         
         if (!result) {
           console.error(`[API Error] No data found for company: ${companyName}`);

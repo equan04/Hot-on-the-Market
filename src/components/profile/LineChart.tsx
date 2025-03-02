@@ -33,16 +33,10 @@ const formatToBillions = (value: number) => {
 const LineChart = ({ companyData }: LineChartProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("revenue");
 
-  console.log("[LineChart] Rendering with data:", {
-    companyData,
-    hasData: !!companyData,
-    fields: companyData ? Object.keys(companyData) : [],
-  });
-
   // Create labels from fiscal year and period
   const labels = useMemo(() => {
     if (!companyData?.fy || !companyData?.fp) {
-      console.log("[LineChart] Missing fy or fp data");
+      console.error("[LineChart] Missing fy or fp data");
       return [];
     }
     return companyData.fy.map(
@@ -247,7 +241,6 @@ const LineChart = ({ companyData }: LineChartProps) => {
   );
 
   if (!companyData) {
-    console.log("[LineChart] No company data provided");
     return <div>No data available</div>;
   }
 

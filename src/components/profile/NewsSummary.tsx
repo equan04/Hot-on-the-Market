@@ -9,7 +9,6 @@ interface NewsSummaryProps {
 }
 
 export default function NewsSummary({ companyName }: NewsSummaryProps) {
-  console.log("news", news);
   const companyNews = news.find((n) => n.name === companyName);
 
   if (!companyNews) {
