@@ -310,7 +310,7 @@ const LineChart = ({ companyData }: LineChartProps) => {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`
-              relative py-2 px-4 text-sm font-medium rounded-t-lg
+              relative py-2 px-4 text-sm font-medium rounded-t-lg cursor-pointer
               ${
                 activeTab === tab.id
                   ? "text-blue-600"
