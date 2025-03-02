@@ -11,19 +11,26 @@ import { Heart, X } from "lucide-react";
 interface SwipeCardProps {
   company: CompanyBasicInfo;
   onSwipe: (direction: "left" | "right") => void;
+  isAnimating: boolean;
 }
 
-const SwipeCard: React.FC<SwipeCardProps> = ({ company, onSwipe }) => {
+const SwipeCard: React.FC<SwipeCardProps> = ({
+  company,
+  onSwipe,
+  isAnimating,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRejected, setIsRejected] = useState(false);
   const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === "ArrowLeft") {
-        handleSwipe("left");
-      } else if (event.key === "ArrowRight") {
-        handleSwipe("right");
+      if (!isAnimating) {
+        if (event.key === "ArrowLeft") {
+          handleSwipe("left");
+        } else if (event.key === "ArrowRight") {
+          handleSwipe("right");
+        }
       }
     };
 
@@ -32,9 +39,11 @@ const SwipeCard: React.FC<SwipeCardProps> = ({ company, onSwipe }) => {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [onSwipe]);
+  }, [onSwipe, isAnimating]);
 
   const handleSwipe = (direction: "left" | "right") => {
+    if (isAnimating) return;
+
     if (direction === "left") {
       setIsRejected(true);
       setImageError(false);
@@ -89,13 +98,19 @@ const SwipeCard: React.FC<SwipeCardProps> = ({ company, onSwipe }) => {
         >
           <button
             onClick={() => handleSwipe("left")}
-            className="text-white bg-red-500 p-4 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition not-only: cursor-pointer"
+            disabled={isAnimating}
+            className={`text-white bg-red-500 p-4 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition ${
+              isAnimating ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+            }`}
           >
             <X />
           </button>
           <button
             onClick={() => handleSwipe("right")}
-            className="text-white bg-green-500 p-4 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition cursor-pointer"
+            disabled={isAnimating}
+            className={`text-white bg-green-500 p-4 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition ${
+              isAnimating ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+            }`}
           >
             <Heart />
           </button>

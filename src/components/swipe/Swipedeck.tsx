@@ -13,6 +13,7 @@ export default function SwipeDeck() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [rejects, setRejects] = useState<string[]>([]);
   const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const handleSwipe = (direction: "left" | "right", companyName?: string) => {
     let company;
@@ -26,13 +27,15 @@ export default function SwipeDeck() {
     } else {
       // Normal swipe from card
       company = companies[index];
+      setIsAnimating(true);
       setSwipeDirection(direction);
-      setIndex((prev) => prev + 1);
 
-      // Reset the swipe direction after a short delay
+      // Wait for animation to complete before updating index
       setTimeout(() => {
+        setIndex((prev) => prev + 1);
         setSwipeDirection(null);
-      }, 400);
+        setIsAnimating(false);
+      }, 500); // Match this with your CSS transition duration
     }
 
     if (!company) return;
@@ -126,9 +129,9 @@ export default function SwipeDeck() {
           <div
             className={`transition-transform duration-500 ${
               swipeDirection === "right"
-                ? "translate-x-[100vw]" // Move the card to the right
+                ? "translate-x-[100vw]"
                 : swipeDirection === "left"
-                ? "translate-x-[-100vw]" // Move the card to the left
+                ? "translate-x-[-100vw]"
                 : ""
             }`}
           >
@@ -136,6 +139,7 @@ export default function SwipeDeck() {
               key={index}
               company={companies[index]}
               onSwipe={handleSwipe}
+              isAnimating={isAnimating}
             />
           </div>
         ) : (
