@@ -7,6 +7,17 @@ import { useCompany } from "@/hooks/getCompany";
 import { getAge } from "@/app/utils/getAge";
 import TypewriterText from "../effects/TypewriterText";
 import ChatButton from "../chat/ChatButton";
+import { Flag } from "lucide-react";
+import risks from "@/data/risks.json";
+
+type CompanyRisk = {
+  name: string;
+  "risk 1": string;
+  "risk 2": string;
+  "risk 3": string;
+  "risk 4": string;
+  "risk 5": string;
+};
 
 interface CompanyModalProps {
   company: CompanyBasicInfo;
@@ -109,6 +120,28 @@ export default function CompanyModal({ company, onClose }: CompanyModalProps) {
                   >
                     {company.percentChange}%
                   </p>
+                </div>
+              </div>
+
+              {/* Risk Section */}
+              <div className="mt-8 bg-gray-50 p-4 rounded-xl w-[500px]">
+                <div className="flex items-center gap-2 mb-4">
+                  <Flag className="w-5 h-5 text-red-500" />
+                  <h3 className="font-semibold text-gray-700">Red Flags</h3>
+                </div>
+                <div className="space-y-2">
+                  {risks.find((r: CompanyRisk) => r.name === company.ticker) &&
+                    Array.from({ length: 5 }, (_, i) => i + 1).map((num) => {
+                      const riskKey = `risk ${num}` as keyof CompanyRisk;
+                      const companyRisks = risks.find(
+                        (r: CompanyRisk) => r.name === company.ticker
+                      );
+                      return (
+                        <div key={num} className="text-sm text-gray-600 pl-7">
+                          {companyRisks?.[riskKey]}
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </div>

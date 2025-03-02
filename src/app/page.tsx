@@ -28,7 +28,7 @@ export default function Home() {
           Get Started
         </a>
         <a
-          href="/learn-more"
+          href="/about"
           className="bg-transparent border border-white text-white hover:bg-white hover:text-pink-500 font-semibold py-3 px-6 rounded-full text-lg shadow-md transition-all"
         >
           Learn More
