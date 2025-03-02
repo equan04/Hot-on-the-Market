@@ -1,0 +1,90 @@
+[
+    {
+        "name" : "COF",
+        "risk 1" : "Pending Acquisition Woes: Merging with Discover Financial Services might come with baggage we didn’t sign up for.",
+        "risk 2" : "Legal Entanglements: We're tangled up in legal proceedings that could tie us up in knots",
+        "risk 3" : "Credit Rating Drama: Moody’s has us on “Ratings Under Review for Downgrade”—definitely not the kind of drama we're after.",
+        "risk 4" : "Regulatory Spotlight: Authorities are watching closely; we might get caught up in some red tape.",
+        "risk 5" : "Market Volatility: Economic shifts could leave us feeling some serious mood swings"
+    },
+    {
+        "name": "AAPL", 
+        "risk 1": "Future Product Profitability Concerns: Upcoming products may not match iPhone's profitability—our next big thing might not be as successful.",
+        "risk 2": "Geopolitical Tensions: Global political unrest could impact sales—let's keep politics out of this relationship!",
+        "risk 3": "AI Feature Safety Risks: New AI features might have unintended consequences",
+        "risk 4": "Regulatory and Legal Challenges: Navigating complex laws and potential investigations",
+        "risk 5": "Macroeconomic Sensitivity: Economic shifts could affect our bottom line"
+    },
+    {
+        "name": "NFLX",
+        "risk 1": "Intense Competition: Everyone's vying for your attention—don't get distracted by the competition!",
+        "risk 2": "Content Costs and Licensing: I can get a little expensive",
+        "risk 3": "Regulatory and Legal Challenges: I might be getting into some legal trouble",
+        "risk 4": "Technological Disruptions: My tech could be evolving too quickly—don’t be shocked by sudden changes!",
+        "risk 5": "Global Economic Conditions: If the economy dips, I could get moody"
+    },
+    {
+        "name": "AMZN",
+        "risk 1": "Intense Competition: There’s a lot of competition out there—don’t let anyone deliver faster than me!",
+        "risk 2": "Supply Chain Challenges: Sometimes my deliveries get delayed—let’s not keep you waiting too long!",
+        "risk 3": "Regulatory and Legal Challenges: I might be navigating tricky rules",
+        "risk 4": "Rising Costs: I might be getting pricier—let’s make sure I’m still worth the investment!",
+        "risk 5": "Global Economic Conditions: If the economy struggles, I might tighten the purse strings"
+    },
+    {
+        "name": "MCD",
+        "risk 1": "Intense Competition: There’s a lot of fast food out there",
+        "risk 2": "Rising Ingredient Costs: Keeping up with me could get expensive—let’s make sure you can still afford your favorites!",
+        "risk 3": "Health Trends: People might be moving away from me",
+        "risk 4": "Regulatory Challenges: The law might try to rain on our parade",
+        "risk 5": "Economic Sensitivity: If the economy dips, my prices might rise"
+    },
+    {
+        "name": "DUOL",
+        "risk 1": "Intense Competition: Everyone’s trying to teach you—let’s make sure I’m the one you pick!",
+        "risk 2": "User Engagement: I might get clingy—be ready for daily reminders to keep learning!",
+        "risk 3": "Regulatory and Legal Risks: Some laws might try to slow me down—expect a little drama in our relationship!",
+        "risk 4": "Monetization Issues: I’m free for now, but I could start asking for more in the future",
+        "risk 5": "Market Saturation: There are plenty of language apps out there"
+    },
+    {
+        "name": "TSLA",
+        "risk 1": "Intense Competition: Everyone’s driving electric—don’t let anyone take my place on the road!",
+        "risk 2": "Regulatory Hurdles: I might hit some speed bumps with the law",
+        "risk 3": "Production Delays: My timelines can get a little...charged",
+        "risk 4": "Economic Sensitivity: If the economy takes a hit, I might need to slow down",
+        "risk 5": "Tech Failures: I need tune-ups every now and then"
+    },
+    {
+        "name": "ABNB",
+        "risk 1": "Intense Competition: There are plenty of places to crash—make sure you’re sticking with me for the best stays!",
+        "risk 2": "Regulatory Scrutiny: I might be facing zoning rules",
+        "risk 3": "Market Sensitivity: If travel slows down, I might not have as many options",
+        "risk 4": "Customer Trust Issues: Not every guest is a perfect match—trust me to find you the best place!",
+        "risk 5": "Operational Costs: Keeping my listings up isn’t cheap"
+    },
+    {
+        "name": "COST",
+        "risk 1": "Intense Competition: There are other big-box stores—but my deals are still the best around!",
+        "risk 2": "Rising Supply Chain Costs: Prices might go up—make sure you're still down to buy in bulk!",
+        "risk 3": "Economic Sensitivity: If the economy slows, I might cut back on discounts—let’s stick to the budget!",
+        "risk 4": "Membership Dependence: You need a membership for the best deals",
+        "risk 5": "Inventory Management: I might run out of your favorite items"
+    },
+    {
+        "name": "WBA",
+        "risk 1": "Intense Competition: Everyone’s got their pharmacy game on",
+        "risk 2": "Regulatory Challenges: I might be dealing with some laws—this legal drama won’t be a dealbreaker, right?",
+        "risk 3": "Changing Consumer Behavior: People might be shifting away from me—don’t leave me like they did!",
+        "risk 4": "Cost Pressures: I’m getting a little pricier—get ready for some higher costs ahead!",
+        "risk 5": "Economic Sensitivity: If the economy struggles, people might cut back"
+    },
+    {
+        "name": "RDDT",
+        "risk 1": "Community Backlash: Sometimes my users get passionate—get ready for some strong opinions!",
+        "risk 2": "Content Moderation Challenges: I might need to filter out some things—but I'll try to keep it PG!",
+        "risk 3": "Revenue Dependence on Ads: If I don't get enough ad love, you’ll see less of me—don’t mind sharing the spotlight!",
+        "risk 4": "Legal and Regulatory Risks: I might get tangled in some legal red tape—brace for the occasional hiccup!",
+        "risk 5": "Platform Saturation: With so many voices out there, you’ll need to scroll a bit more. But hey, you love spending time with me!"
+    }
+]
