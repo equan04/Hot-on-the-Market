@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 interface Message {
   role: "user" | "assistant" | "system";
   content: string;
