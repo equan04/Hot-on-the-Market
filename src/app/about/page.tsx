@@ -50,39 +50,85 @@ export default function Home() {
           </li>
         </ul>
 
-        <h3 className="text-xl font-semibold mb-2">📊 Getting to Know You</h3>
+        <h3 className="text-xl font-semibold mb-2">🤔 Getting to Know You</h3>
         <p className="text-lg mb-4">
           If you’re intrigued, you can check out a more in-depth profile:
         </p>
 
-        <div className="max-w-2xl mx-auto px-6 py-12 text-gray-900">
-        <h2 className="text-2xl font-bold mb-4">📊 Income Metrics Graph – Are They Making Money?</h2>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-          <li><strong>Net Income:</strong> The company’s profit after all expenses. If this is negative, they’re losing money.</li>
-          <li><strong>Operating Income:</strong> Profit from core business operations (before taxes and other expenses). A strong number means they have a solid business model.</li>
-          <li><strong>Comprehensive Income:</strong> Includes all gains/losses (like foreign currency or investment adjustments) that don’t show in net income. A big difference between net and comprehensive income could signal hidden risks.</li>
-        </ul>
+        <div className="max-w-2xl">
+          <h2 className="text-lg font-semibold mb-4">
+            📊 Income Metrics Graph – Are They Making Money?
+          </h2>
+          <ul className="list-disc list-inside space-y-2 mb-6">
+            <li>
+              <strong>Net Income:</strong> The company’s profit after all
+              expenses. If this is negative, they’re losing money.
+            </li>
+            <li>
+              <strong>Operating Income:</strong> Profit from core business
+              operations (before taxes and other expenses). A strong number
+              means they have a solid business model.
+            </li>
+            <li>
+              <strong>Comprehensive Income:</strong> Includes all gains/losses
+              (like foreign currency or investment adjustments) that don’t show
+              in net income. A big difference between net and comprehensive
+              income could signal hidden risks.
+            </li>
+          </ul>
 
-        <h2 className="text-2xl font-bold mb-4">💰 Balance Sheet Graph – What Do They Own vs. What They Owe?</h2>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-          <li><strong>Assets:</strong> Everything the company owns (cash, buildings, patents, etc.). More assets = stronger financial position.</li>
-          <li><strong>Liabilities:</strong> What they owe (debts, loans, expenses). High liabilities aren’t always bad, but too much debt can be risky.</li>
-          <li><strong>Stockholders' Equity:</strong> What’s left for shareholders after subtracting liabilities from assets. Growing equity means the company is building value.</li>
-        </ul>
+          <h2 className="text-lg font-semibold mb-4">
+            💰 Balance Sheet Graph – What Do They Own vs. What They Owe?
+          </h2>
+          <ul className="list-disc list-inside space-y-2 mb-6">
+            <li>
+              <strong>Assets:</strong> Everything the company owns (cash,
+              buildings, patents, etc.). More assets = stronger financial
+              position.
+            </li>
+            <li>
+              <strong>Liabilities:</strong> What they owe (debts, loans,
+              expenses). High liabilities aren’t always bad, but too much debt
+              can be risky.
+            </li>
+            <li>
+              <strong>Stockholders' Equity:</strong> What’s left for
+              shareholders after subtracting liabilities from assets. Growing
+              equity means the company is building value.
+            </li>
+          </ul>
 
-        <h2 className="text-2xl font-bold mb-4">💵 Cash Position Graph – Can They Survive a Rainy Day?</h2>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-          <li><strong>Cash & Cash Equivalents:</strong> Immediate cash available. Low cash reserves can signal trouble if the company runs into problems.</li>
-          <li><strong>Cash & Restricted Cash:</strong> Includes cash that can’t be used freely (due to regulations or agreements). It’s important to see how much of their cash is actually usable.</li>
-        </ul>
+          <h2 className="text-lg font-semibold mb-4">
+            💵 Cash Position Graph – Can They Survive a Rainy Day?
+          </h2>
+          <ul className="list-disc list-inside space-y-2 mb-6">
+            <li>
+              <strong>Cash & Cash Equivalents:</strong> Immediate cash
+              available. Low cash reserves can signal trouble if the company
+              runs into problems.
+            </li>
+            <li>
+              <strong>Cash & Restricted Cash:</strong> Includes cash that can’t
+              be used freely (due to regulations or agreements). It’s important
+              to see how much of their cash is actually usable.
+            </li>
+          </ul>
 
-        <h2 className="text-2xl font-bold mb-4">📉 Revenue Graph – Where’s the Money Coming From?</h2>
-        <ul className="list-disc list-inside space-y-2 mb-6">
-          <li><strong>Total Revenue:</strong> The big picture number: all the money coming in from sales and services.</li>
-          <li><strong>Revenue from Contracts:</strong> The portion of revenue that comes from long-term contracts or recurring sales. Stable contract revenue is a good sign of predictable income.</li>
-        </ul>
-      </div>
-
+          <h2 className="text-lg font-semibold mb-4">
+            📉 Revenue Graph – Where’s the Money Coming From?
+          </h2>
+          <ul className="list-disc list-inside space-y-2 mb-6">
+            <li>
+              <strong>Total Revenue:</strong> The big picture number: all the
+              money coming in from sales and services.
+            </li>
+            <li>
+              <strong>Revenue from Contracts:</strong> The portion of revenue
+              that comes from long-term contracts or recurring sales. Stable
+              contract revenue is a good sign of predictable income.
+            </li>
+          </ul>
+        </div>
 
         {/* <ul className="list-disc list-inside space-y-2 mb-6">
           <li>
