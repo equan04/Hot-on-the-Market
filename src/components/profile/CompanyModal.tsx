@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import CompanyBasicInfo from "@/types/CompanyBasicInfo";
 import Tooltip from "../ui/Tooltip";
@@ -7,6 +6,7 @@ import LineChart from "./LineChart";
 import { useCompany } from "@/hooks/getCompany";
 import { getAge } from "@/app/utils/getAge";
 import TypewriterText from "../effects/TypewriterText";
+import ChatButton from "../chat/ChatButton";
 
 interface CompanyModalProps {
   company: CompanyBasicInfo;
@@ -15,14 +15,6 @@ interface CompanyModalProps {
 
 export default function CompanyModal({ company, onClose }: CompanyModalProps) {
   const { data: companyGraphData, isLoading } = useCompany(company.name);
-
-  useEffect(() => {
-    // Prevent scrolling when modal is open
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, []);
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -33,7 +25,7 @@ export default function CompanyModal({ company, onClose }: CompanyModalProps) {
       />
 
       {/* Modal Content */}
-      <div className="relative bg-white w-full h-full overflow-y-auto">
+      <div className="relative bg-white w-full h-full">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -54,86 +46,96 @@ export default function CompanyModal({ company, onClose }: CompanyModalProps) {
           </svg>
         </button>
 
-        {/* Two Column Layout */}
-        <div className="flex h-full">
-          {/* Left Column - Company Info */}
-          <div className="w-1/2 p-20 space-y-8">
-            <img
-              src={company.imageUrl}
-              alt={company.displayName}
-              className="w-96 h-96 object-contain object-left"
-            />
+        {/* Scrollable Container */}
+        <div className="h-full overflow-y-auto">
+          {/* Two Column Layout */}
+          <div className="flex min-h-full">
+            {/* Left Column - Company Info */}
+            <div className="w-1/2 pl-20 py-12">
+              <img
+                src={company.imageUrl}
+                alt={company.displayName}
+                className="w-[200px] h-[200px] object-contain object-left"
+              />
 
-            <div className="w-full">
-              <div className="flex items-center mb-3">
-                <h2 className="text-5xl font-bold text-gray-800">
-                  {company.displayName}
-                </h2>
-                <div className="ml-4">
-                  <IndustryIcon
-                    industry={company.industry}
-                    className="scale-125"
-                  />
+              <div className="w-full">
+                <div className="flex items-center mb-3">
+                  <h2 className="text-5xl font-bold text-gray-800">
+                    {company.displayName}
+                  </h2>
+                  <div className="ml-4">
+                    <IndustryIcon
+                      industry={company.industry}
+                      className="scale-125"
+                    />
+                  </div>
+                </div>
+                <div className="mb-8">
+                  <Tooltip text="This is my ticker symbol, which helps identify my stock on the market ;)">
+                    <p className="text-2xl text-gray-600">
+                      Or you can call me {company.ticker} ;)
+                    </p>
+                  </Tooltip>
                 </div>
               </div>
-              <div className="mb-8">
-                <Tooltip text="This is my ticker symbol, which helps identify my stock on the market ;)">
-                  <p className="text-2xl text-gray-600">
-                    Or you can call me {company.ticker} ;)
+
+              <div className="grid grid-cols-2 gap-6 w-[500px] text-base">
+                <div className="bg-gray-50 p-2 rounded-xl">
+                  <p className="font-semibold text-gray-600 mb-2">Age</p>
+                  <p className="text-gray-800">
+                    {getAge(company.yearIncorporated)}
                   </p>
-                </Tooltip>
+                </div>
+                <div className="bg-gray-50 p-2 rounded-xl">
+                  <p className="font-semibold text-gray-600 mb-2">Revenue</p>
+                  <p className="text-gray-800">
+                    ${company.revenue.toLocaleString()}
+                  </p>
+                </div>
+                <div className="bg-gray-50 p-2 rounded-xl">
+                  <p className="font-semibold text-gray-600 mb-2">
+                    Stock Price
+                  </p>
+                  <p className="text-gray-800">${company.latestStockPrice}</p>
+                </div>
+                <div className="bg-gray-50 p-2 rounded-xl">
+                  <p className="font-semibold text-gray-600 mb-2">YTD Change</p>
+                  <p
+                    className={`${
+                      company.percentChange >= 0
+                        ? "text-green-600"
+                        : "text-red-600"
+                    } font-semibold`}
+                  >
+                    {company.percentChange}%
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-6 w-[500px] text-base">
-              <div className="bg-gray-50 p-6 rounded-xl">
-                <p className="font-semibold text-gray-600 mb-2">Age</p>
-                <p className="text-gray-800">
-                  {getAge(company.yearIncorporated)}
-                </p>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-xl">
-                <p className="font-semibold text-gray-600 mb-2">Revenue</p>
-                <p className="text-gray-800">
-                  ${company.revenue.toLocaleString()}
-                </p>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-xl">
-                <p className="font-semibold text-gray-600 mb-2">Stock Price</p>
-                <p className="text-gray-800">${company.latestStockPrice}</p>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-xl">
-                <p className="font-semibold text-gray-600 mb-2">YTD Change</p>
-                <p
-                  className={`${
-                    company.percentChange >= 0
-                      ? "text-green-600"
-                      : "text-red-600"
-                  } font-semibold`}
-                >
-                  {company.percentChange}%
-                </p>
+            {/* Right Column - Caption and Chart */}
+            <div className="w-1/2 p-20 space-y-8">
+              <p className="text-2xl text-gray-600 italic">
+                &quot;
+                <TypewriterText text={company.caption} speed={75} />
+                &quot;
+              </p>
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                {isLoading ? (
+                  <div>Loading...</div>
+                ) : companyGraphData ? (
+                  <LineChart companyData={companyGraphData} />
+                ) : (
+                  <div>No data available</div>
+                )}
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Right Column - Caption and Chart */}
-          <div className="w-1/2 p-20 space-y-8">
-            <p className="text-2xl text-gray-600 italic">
-              &quot;
-              <TypewriterText text={company.caption} speed={75} />
-              &quot;
-            </p>
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              {isLoading ? (
-                <div>Loading...</div>
-              ) : companyGraphData ? (
-                <LineChart companyData={companyGraphData} />
-              ) : (
-                <div>No data available</div>
-              )}
-            </div>
-          </div>
+        {/* Floating Chat Button */}
+        <div className="fixed bottom-8 right-8">
+          {companyGraphData && <ChatButton companyData={companyGraphData} />}
         </div>
       </div>
     </div>,

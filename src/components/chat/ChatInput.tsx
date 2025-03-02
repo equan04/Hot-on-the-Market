@@ -4,17 +4,6 @@ interface ChatInputProps {
   onSendMessage: (message: string) => void;
   isLoading: boolean;
 }
-interface Message {
-  role: "user" | "assistant" | "system";
-  content: string;
-  id?: string;
-}
-interface ChatState {
-  messages: Message[];
-  isLoading: boolean;
-  error: string | null;
-}
-
 
 const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
   const [message, setMessage] = useState("");
