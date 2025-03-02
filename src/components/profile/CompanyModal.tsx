@@ -40,7 +40,7 @@ export default function CompanyModal({ company, onClose }: CompanyModalProps) {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="fixed top-6 right-6 z-50 bg-white rounded-full p-2 shadow-lg text-gray-500 hover:text-gray-700 transition-colors"
+          className="fixed top-6 right-6 z-50 bg-white rounded-full p-2 shadow-lg text-gray-500 hover:text-gray-700 transition-colors cursor-pointer"
         >
           <svg
             className="w-8 h-8"
