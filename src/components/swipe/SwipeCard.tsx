@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CompanyModal from "../profile/CompanyModal";
 import CompanyBlurb from "../company-info/CompanyBlurb";
 import IndustryIcon from "../company-info/IndustryIcon";
 import PercentChange from "../company-info/PercentChange";
 import CompanyBasicInfo from "@/types/CompanyBasicInfo";
+import { Heart, X } from "lucide-react";
 
 interface SwipeCardProps {
   company: CompanyBasicInfo;
@@ -14,6 +15,22 @@ interface SwipeCardProps {
 
 const SwipeCard: React.FC<SwipeCardProps> = ({ company, onSwipe }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        onSwipe("left");
+      } else if (event.key === "ArrowRight") {
+        onSwipe("right");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [onSwipe]);
 
   return (
     <>
@@ -40,20 +57,20 @@ const SwipeCard: React.FC<SwipeCardProps> = ({ company, onSwipe }) => {
         </div>
 
         <div
-          className="flex justify-between w-full px-4 mt-4"
+          className="flex flex-row gap-4 items-center justify-center w-full px-4 mt-4"
           onClick={(e) => e.stopPropagation()}
         >
           <button
             onClick={() => onSwipe("left")}
-            className="text-white bg-red-500 py-2 px-6 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition"
+            className="text-white bg-red-500 p-4 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition not-only: cursor-pointer"
           >
-            Reject
+            <X />
           </button>
           <button
             onClick={() => onSwipe("right")}
-            className="text-white bg-green-500 py-2 px-6 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition"
+            className="text-white bg-green-500 p-4 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition cursor-pointer"
           >
-            Like
+            <Heart />
           </button>
         </div>
       </div>
