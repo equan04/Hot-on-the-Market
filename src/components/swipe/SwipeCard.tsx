@@ -1,11 +1,10 @@
 "use client";
 
-// SwipeCard.tsx
 import React, { useState } from "react";
 import CompanyModal from "../profile/CompanyModal";
 import CompanyBlurb from "../company-info/CompanyBlurb";
 import IndustryIcon from "../company-info/IndustryIcon";
-import PercentChange from "../PercentChange";
+import PercentChange from "../company-info/PercentChange";
 import CompanyBasicInfo from "@/types/CompanyBasicInfo";
 
 interface SwipeCardProps {

@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import CompanyBasicInfo from "@/types/CompanyBasicInfo";
-import Tooltip from "../Tooltip";
+import Tooltip from "../ui/Tooltip";
 import IndustryIcon from "../company-info/IndustryIcon";
 import LineChart from "./LineChart";
 import { useCompany } from "@/hooks/getCompany";
 import { getAge } from "@/app/utils/getAge";
+import TypewriterText from "../effects/TypewriterText";
 
 interface CompanyModalProps {
   company: CompanyBasicInfo;
@@ -119,7 +120,9 @@ export default function CompanyModal({ company, onClose }: CompanyModalProps) {
           {/* Right Column - Caption and Chart */}
           <div className="w-1/2 p-20 space-y-8">
             <p className="text-2xl text-gray-600 italic">
-              &quot;{company.caption}&quot;
+              &quot;
+              <TypewriterText text={company.caption} speed={75} />
+              &quot;
             </p>
             <div className="bg-white rounded-xl shadow-lg p-8">
               {isLoading ? (

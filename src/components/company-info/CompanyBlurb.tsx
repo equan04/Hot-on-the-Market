@@ -1,5 +1,5 @@
 import CompanyBasicInfo from "@/types/CompanyBasicInfo";
-import Tooltip from "../Tooltip";
+import Tooltip from "../ui/Tooltip";
 import { getAge } from "@/app/utils/getAge";
 
 interface CompanyBlurbProps {

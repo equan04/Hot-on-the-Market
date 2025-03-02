@@ -10,7 +10,7 @@ interface TypewriterTextProps {
 
 export default function TypewriterText({
   text,
-  speed = 50,
+  speed = 200,
   className = "",
 }: TypewriterTextProps) {
   const [displayText, setDisplayText] = useState("");
@@ -21,10 +21,19 @@ export default function TypewriterText({
     setDisplayText("");
     setIsTyping(true);
 
+    // Ensure text is a string and handle any undefined cases
+    const safeText = typeof text === "string" ? text : "";
+
+    // Split text into array of characters, properly handling emojis and special characters
+    const characters = [...safeText];
+
     let currentIndex = 0;
+
     const typeText = () => {
-      if (currentIndex < text.length) {
-        setDisplayText((prev) => prev + text[currentIndex]);
+      if (currentIndex < characters.length) {
+        const nextChar = characters[currentIndex];
+        console.log("Adding character:", nextChar);
+        setDisplayText((prev) => prev + nextChar);
         currentIndex++;
         setTimeout(typeText, speed);
       } else {

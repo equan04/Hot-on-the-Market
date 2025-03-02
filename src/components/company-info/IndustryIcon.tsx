@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 import { Hamburger, Pill } from "phosphor-react";
-import Tooltip from "../Tooltip";
+import Tooltip from "../ui/Tooltip";
 
 interface IndustryIconProps {
   industry: string;

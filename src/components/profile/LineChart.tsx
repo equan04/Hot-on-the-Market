@@ -301,9 +301,7 @@ const LineChart = ({ companyData }: LineChartProps) => {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold text-center">
-        Financial Overview: {companyData.name}
-      </h1>
+      <h1 className="text-2xl font-bold text-center">Financial Overview</h1>
 
       {/* Tabs */}
       <div className="flex space-x-1 border-b border-gray-200">

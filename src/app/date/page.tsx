@@ -1,4 +1,4 @@
-import SwipeDeck from "@/components/Swipedeck";
+import SwipeDeck from "@/components/swipe/Swipedeck";
 
 export default function Home() {
   return (
