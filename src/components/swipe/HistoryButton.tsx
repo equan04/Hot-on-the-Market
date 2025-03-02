@@ -38,7 +38,7 @@ export default function HistoryButton({ onClick, isOpen }: HistoryButtonProps) {
       ref={buttonRef}
       onClick={onClick}
       className={
-        "fixed top-[75px] right-6 z-20 p-3 rounded-full shadow-lg transition-all duration-300 mb-4 bg-white hover:bg-gray-100"
+        "fixed top-[75px] right-6 z-20 p-3 rounded-full shadow-lg transition-all duration-300 mb-4 bg-white hover:bg-gray-100 cursor-pointer"
       }
       aria-label="View History"
       aria-expanded={isOpen}
