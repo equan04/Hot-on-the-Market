@@ -1,3 +1,5 @@
+import React from "react";
+
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
@@ -9,31 +11,130 @@ export default function Tooltip({
   children,
   position = "bottom",
 }: TooltipProps) {
-  const positionClasses = {
-    top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
-    bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
-    left: "right-full top-1/2 -translate-y-1/2 mr-2",
-    right: "left-full top-1/2 -translate-y-1/2 ml-2",
-  };
+  const tooltipRef = React.useRef<HTMLDivElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [tooltipStyle, setTooltipStyle] = React.useState<React.CSSProperties>(
+    {}
+  );
+  const [arrowStyle, setArrowStyle] = React.useState<React.CSSProperties>({});
 
-  const arrowClasses = {
-    top: "-bottom-1 left-1/2 -translate-x-1/2 rotate-45",
-    bottom: "-top-1 left-1/2 -translate-x-1/2 rotate-45",
-    left: "-right-1 top-1/2 -translate-y-1/2 rotate-45",
-    right: "-left-1 top-1/2 -translate-y-1/2 rotate-45",
-  };
+  React.useEffect(() => {
+    const updatePosition = () => {
+      if (!tooltipRef.current || !containerRef.current) return;
+
+      const container = containerRef.current.getBoundingClientRect();
+      const tooltip = tooltipRef.current.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const tooltipWidth = tooltip.width;
+
+      let style: React.CSSProperties = {};
+      let arrow: React.CSSProperties = {
+        position: "absolute",
+        width: "8px",
+        height: "8px",
+        backgroundColor: "rgb(31, 41, 55)", // matches bg-gray-800
+        transform: "rotate(45deg)",
+      };
+
+      // Handle horizontal positioning
+      if (position === "bottom" || position === "top") {
+        // Calculate if tooltip would overflow either side
+        const centerOffset = container.width / 2;
+        const wouldOverflowLeft =
+          container.left + centerOffset - tooltipWidth / 2 < 0;
+        const wouldOverflowRight =
+          container.right - centerOffset + tooltipWidth / 2 > viewportWidth;
+
+        if (wouldOverflowLeft) {
+          // Align tooltip to left edge with small margin
+          style = {
+            left: "0px",
+            transform: "translateX(0)",
+          };
+          // Position arrow relative to the trigger element
+          const arrowOffset = container.left + container.width / 2;
+          arrow = {
+            ...arrow,
+            left: `${arrowOffset}px`,
+            marginLeft: "-4px",
+          };
+        } else if (wouldOverflowRight) {
+          // Align tooltip to right edge with small margin
+          style = {
+            left: "100%",
+            transform: "translateX(-100%)",
+          };
+          // Position arrow relative to the trigger element
+          const arrowOffset =
+            viewportWidth - container.right + container.width / 2;
+          arrow = {
+            ...arrow,
+            right: `${arrowOffset}px`,
+            marginRight: "-4px",
+          };
+        } else {
+          // Center alignment
+          style = {
+            left: "50%",
+            transform: "translateX(-50%)",
+          };
+          arrow = {
+            ...arrow,
+            left: "50%",
+            marginLeft: "-4px",
+          };
+        }
+
+        // Add vertical offset and arrow position
+        if (position === "top") {
+          style.bottom = "100%";
+          style.marginBottom = "0.5rem";
+          arrow.bottom = "-4px";
+        } else {
+          style.top = "100%";
+          style.marginTop = "0.5rem";
+          arrow.top = "-4px";
+        }
+      }
+
+      setTooltipStyle(style);
+      setArrowStyle(arrow);
+    };
+
+    // Initial position update
+    updatePosition();
+
+    // Update position when tooltip becomes visible
+    const observer = new MutationObserver(updatePosition);
+
+    if (tooltipRef.current) {
+      observer.observe(tooltipRef.current, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+    }
+
+    window.addEventListener("resize", updatePosition);
+    window.addEventListener("scroll", updatePosition);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updatePosition);
+      window.removeEventListener("scroll", updatePosition);
+    };
+  }, [position]);
 
   return (
-    <div className="group relative inline-block">
+    <div className="group relative inline-block" ref={containerRef}>
       {children}
       <div
-        className={`absolute ${positionClasses[position]} opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50`}
+        ref={tooltipRef}
+        style={tooltipStyle}
+        className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50"
       >
-        <div className="bg-gray-800 text-white text-sm px-3 py-1 rounded-full whitespace-nowrap">
+        <div className="bg-gray-800 text-white text-sm px-3 py-1 rounded-lg whitespace-nowrap relative">
           {text}
-          <div
-            className={`absolute ${arrowClasses[position]} w-2 h-2 bg-gray-800`}
-          />
+          <div style={arrowStyle} />
         </div>
       </div>
     </div>
