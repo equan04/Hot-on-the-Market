@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import SwipeCard from "./SwipeCard";
-import companies from "@/app/data/companies";
+import companies from "@/data/companies";
 
 export default function SwipeDeck() {
   const [index, setIndex] = useState(0);
