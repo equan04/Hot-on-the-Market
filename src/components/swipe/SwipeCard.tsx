@@ -15,13 +15,15 @@ interface SwipeCardProps {
 
 const SwipeCard: React.FC<SwipeCardProps> = ({ company, onSwipe }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRejected, setIsRejected] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (event.key === "ArrowLeft") {
-        onSwipe("left");
+        handleSwipe("left");
       } else if (event.key === "ArrowRight") {
-        onSwipe("right");
+        handleSwipe("right");
       }
     };
 
@@ -31,6 +33,27 @@ const SwipeCard: React.FC<SwipeCardProps> = ({ company, onSwipe }) => {
       window.removeEventListener("keydown", handleKeyPress);
     };
   }, [onSwipe]);
+
+  const handleSwipe = (direction: "left" | "right") => {
+    if (direction === "left") {
+      setIsRejected(true);
+      setImageError(false);
+
+      if (company.rejectImageUrl) {
+        setTimeout(() => onSwipe(direction), 1000);
+      } else {
+        onSwipe(direction);
+      }
+    } else {
+      onSwipe(direction);
+    }
+  };
+
+  // Determine which image URL to use
+  const imageUrl =
+    isRejected && company.rejectImageUrl && !imageError
+      ? company.rejectImageUrl
+      : company.imageUrl;
 
   return (
     <>
@@ -47,9 +70,13 @@ const SwipeCard: React.FC<SwipeCardProps> = ({ company, onSwipe }) => {
         </div>
 
         <img
-          src={company.imageUrl}
+          src={imageUrl}
           alt={company.name}
-          className="w-32 h-32 object-contain mb-2"
+          className="w-32 h-32 object-contain mb-2 transition-opacity duration-300"
+          onError={() => {
+            setImageError(true);
+            console.warn(`Failed to load image: ${imageUrl}`);
+          }}
         />
 
         <div className="w-full">
@@ -61,13 +88,13 @@ const SwipeCard: React.FC<SwipeCardProps> = ({ company, onSwipe }) => {
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            onClick={() => onSwipe("left")}
+            onClick={() => handleSwipe("left")}
             className="text-white bg-red-500 p-4 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition not-only: cursor-pointer"
           >
             <X />
           </button>
           <button
-            onClick={() => onSwipe("right")}
+            onClick={() => handleSwipe("right")}
             className="text-white bg-green-500 p-4 rounded-full text-lg font-semibold shadow-lg transform hover:scale-105 transition cursor-pointer"
           >
             <Heart />

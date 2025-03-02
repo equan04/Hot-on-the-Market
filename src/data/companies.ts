@@ -41,6 +41,7 @@ const companies: CompanyBasicInfo[] = [
       percentChange: -4.24,
       imageUrl:
         "https://1000logos.net/wp-content/uploads/2020/10/Duolingo-logo.png",
+      rejectImageUrl: "/reject-duolingo.png",
       caption: "Wanna practice some love languages? 😘",
     },
     {

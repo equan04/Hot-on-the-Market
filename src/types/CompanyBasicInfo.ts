@@ -9,6 +9,7 @@ type CompanyBasicInfo = {
     latestStockPrice: number;
     percentChange: number;  
     imageUrl: string;
+    rejectImageUrl?: string;
     caption: string;
 }
 
