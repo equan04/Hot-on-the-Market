@@ -30,7 +30,7 @@ export default function HeroContent() {
 
       {/* Main Content */}
       <div className="text-center max-w-3xl">
-        <div className="text-4xl sm:text-6xl font-bold leading-tight flex flex-col gap-2">
+        <div className="text-4xl sm:text-6xl font-bold leading-tight flex flex-col gap-2 whitespace-nowrap">
           <div
             className={`transition-all duration-500 ${
               showMainContent
@@ -47,7 +47,7 @@ export default function HeroContent() {
                 : "opacity-0 -translate-y-4"
             }`}
           >
-            When You Can Make Money? 🤑
+            When You Have Money? 🤑
           </div>
         </div>
         <p
