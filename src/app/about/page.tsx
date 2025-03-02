@@ -1,7 +1,7 @@
 // pages/about.tsx
 export default function Home() {
   return (
-    <div className="w-full px-6 py-12 bg-gradient-to-br from-yellow-500 to-red-500 text-white p-6">
+    <div className="w-full px-6 py-12 bg-gradient-to-br from-yellow-600 to-red-600 text-white p-6">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-4xl font-bold mb-6 text-center">
           About Hot on the Market
