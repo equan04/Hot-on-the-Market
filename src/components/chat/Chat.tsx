@@ -10,8 +10,12 @@ import MessageComponent from "./Message";
 import ChatInput from "./ChatInput";
 import CompanyGraphInfo from "../../types/CompanyGraphInfo";
 
-export default function Chat(companyData: CompanyGraphInfo) {
-  // const [messages, setMessages] = useState<Message[]>([]);
+interface ChatProps {
+  displayName: string;
+  companyData: CompanyGraphInfo;
+}
+
+export default function Chat({ displayName, companyData }: ChatProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -19,7 +23,7 @@ export default function Chat(companyData: CompanyGraphInfo) {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant", // Add system message when component loads
-      content: `System Prompt: Hello, you are the dating profile of ${companyData.name}. 
+      content: `System Prompt: Hello, you are the dating profile of ${displayName}. 
       You are presenting yourself as an investment, not goods to be purchased. 
       Emulate a dating profile while sharing information about your company including things like 
       why a user would want to invest in you, what your issues are etc. 
@@ -80,17 +84,20 @@ export default function Chat(companyData: CompanyGraphInfo) {
       <div className="flex-1 overflow-y-auto mb-4 space-y-4">
         {messages.length === 0 ? (
           <div className="text-center text-gray-500 my-8">
-            Start a conversation with {companyData.name}!
+            Start a conversation with {displayName}!
           </div>
         ) : (
-          messages.map((message) => (
-            !message.content.startsWith("System Prompt") && <MessageComponent key={message.id} message={message} />
-          ))
+          messages.map(
+            (message) =>
+              !message.content.startsWith("System Prompt") && (
+                <MessageComponent key={message.id} message={message} />
+              )
+          )
         )}
         {isLoading && (
           <div className="flex justify-center items-center py-4">
             <div className="animate-pulse text-gray-500">
-              {companyData.name} is typing...
+              {displayName} is typing...
             </div>
           </div>
         )}

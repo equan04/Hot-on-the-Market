@@ -135,7 +135,12 @@ export default function CompanyModal({ company, onClose }: CompanyModalProps) {
 
         {/* Floating Chat Button */}
         <div className="fixed bottom-8 right-8">
-          {companyGraphData && <ChatButton companyData={companyGraphData} />}
+          {companyGraphData && (
+            <ChatButton
+              displayName={company.displayName}
+              companyData={companyGraphData}
+            />
+          )}
         </div>
       </div>
     </div>,

@@ -4,11 +4,16 @@ import CompanyGraphInfo from "@/types/CompanyGraphInfo";
 import Chat from "./Chat";
 
 interface ChatModalProps {
+  displayName: string;
   companyData: CompanyGraphInfo;
   onClose: () => void;
 }
 
-export default function ChatModal({ companyData, onClose }: ChatModalProps) {
+export default function ChatModal({
+  displayName,
+  companyData,
+  onClose,
+}: ChatModalProps) {
   useEffect(() => {
     // Prevent scrolling when modal is open
     const currentScroll = window.scrollY;
@@ -54,7 +59,7 @@ export default function ChatModal({ companyData, onClose }: ChatModalProps) {
 
         {/* Scrollable Chat Content */}
         <div className="flex-1 overflow-y-auto p-4">
-          <Chat {...companyData} />
+          <Chat displayName={displayName} companyData={companyData} />
         </div>
       </div>
     </div>,
