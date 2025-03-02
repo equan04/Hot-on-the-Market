@@ -2,6 +2,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+import 'react-chatbot-kit/build/main.css'
+
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-pink-500 to-red-500 text-white p-6">
