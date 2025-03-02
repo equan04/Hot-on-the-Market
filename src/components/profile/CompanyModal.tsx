@@ -3,6 +3,7 @@ import CompanyBasicInfo from "@/types/CompanyBasicInfo";
 import Tooltip from "../ui/Tooltip";
 import IndustryIcon from "../company-info/IndustryIcon";
 import LineChart from "./LineChart";
+import NewsSummary from "./NewsSummary";
 import { useCompany } from "@/hooks/getCompany";
 import { getAge } from "@/app/utils/getAge";
 import TypewriterText from "../effects/TypewriterText";
@@ -161,6 +162,12 @@ export default function CompanyModal({ company, onClose }: CompanyModalProps) {
                 ) : (
                   <div>No data available</div>
                 )}
+              </div>
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                <h3 className="text-lg font-semibold text-gray-700 mb-4">
+                  News Sentiment Analysis
+                </h3>
+                <NewsSummary companyName={company.ticker} />
               </div>
             </div>
           </div>
