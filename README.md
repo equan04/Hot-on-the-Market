@@ -15,3 +15,10 @@ All JSON data used in this project is sourced from SEC filings. The `scripts` fo
 * UI/UX: Framer Motion, Swiper.js
 * State Management: React Hooks
 * Version Control: Git
+
+## Project Demo
+
+https://github.com/user-attachments/assets/57005554-471d-4e18-9992-898814a8ba54
+
+
+
